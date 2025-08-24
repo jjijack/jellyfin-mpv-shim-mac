@@ -51,14 +51,19 @@
     ![设置播放设备](assets/cast_device.png)
 
 2.  **启用 Anime4K 滤镜 (可选)**
-    本安装脚本已为您自动配置了快捷键，方便您在播放视频时轻松切换不同的 Anime4K 预设。关于不同滤镜的具体说明，请参阅 [Anime4K 官方 GLSL 指南](https://github.com/bloc97/Anime4K/blob/v4.0.1/GLSL_Instructions.md)。
+    您可以永久性地设置一个默认的视频滤镜，或者在播放时进行临时切换。关于不同滤镜的具体说明，请参阅 [Anime4K 官方 GLSL 指南](https://github.com/bloc97/Anime4K/blob/v4.0.1/GLSL_Instructions.md)。
 
-    * **推荐方法 (快捷键):**
-        * **`CTRL + 1` 至 `CTRL + 6`**: 激活不同的 Anime4K “Fast” 模式。屏幕上会显示相应的文字（例如 “Anime4K: Mode A (Fast)”）来确认切换成功。
-        * **`CTRL + 0`**: 清除所有已加载的滤镜，恢复默认视频画面。
+    * **推荐方法 (永久设置):**
+        在播放视频时按下 **回车键 (Enter)** 打开菜单，选择 `Change Video Playback Profile`，然后选择一个 Anime4K 预设。您的选择将被记忆，并作为未来所有视频的默认滤镜。
 
-    * **备用方法 (屏幕菜单):**
-        您也可以在播放视频时按下 **回车键 (Enter)** 打开菜单，选择 `Change Video Playback Profile`，然后选择一个 Anime4K 预设。此设置同样会被记忆，无需重复操作。
+    * **备用方法 (临时快捷键):**
+        安装脚本也为您配置了快捷键，方便您在单次播放中快速、临时地调整滤镜。这些更改不会被保存到下一个视频。
+        * **`CTRL + 1` 至 `CTRL + 6`**: 激活不同的 Anime4K “Fast” 模式。
+        * **`CTRL + 0`**: 清除所有已加载的滤镜。
+
+## 卸载
+
+如果您需要卸载本程序及其所有依赖，请在终端中运行 [Releases 页面](https://github.com/jjijack/jellyfin-mpv-shim-mac/releases) 中的 `uninstall.sh` 脚本。
 
 ## 使用技巧
 
@@ -90,10 +95,6 @@
 最开始，只会显示 Jellyfin 的官方客户端图标和一个代表 `jellyfin-mpv-shim` 服务的 Python 火箭图标。当视频开始播放后，MPV 的图标会出现。
 
 如果 `jellyfin-mpv-shim` 服务因错误而终止，它的图标会短暂消失，随后因为脚本的自动重启而再次出现。当您退出 Jellyfin Media Player 主程序后，这三个图标应该都会消失。
-
-## 卸载
-
-如果您需要卸载本程序及其所有依赖，请在终端中运行 [Releases 页面](https://github.com/jjijack/jellyfin-mpv-shim-mac/releases) 中的 `uninstall.sh` 脚本。
 
 ## 自行打包 App
 

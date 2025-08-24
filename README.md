@@ -51,15 +51,15 @@ After the first launch, you may need to configure the following settings within 
     ![Set Playback Device](assets/cast_device.png)
 
 2.  **Enable Anime4K Filters (Optional)**
-    The installer automatically configures hotkeys for an easy way to toggle different Anime4K presets during video playback. For a detailed explanation of what each Anime4K filter does, please refer to the [official GLSL Instructions](https://github.com/bloc97/Anime4K/blob/v4.0.1/GLSL_Instructions.md).
+    To permanently set a default video filter or to temporarily switch between them, you can use the following methods. For a detailed explanation of what each Anime4K filter does, please refer to the [official GLSL Instructions](https://github.com/bloc97/Anime4K/blob/v4.0.1/GLSL_Instructions.md).
 
-    * **Recommended Method (Hotkeys):**
-        * **`CTRL + 1` to `CTRL + 6`**: Activate different "Fast" modes of Anime4K. A text overlay (e.g., "Anime4K: Mode A (Fast)") will appear on-screen to confirm the change.
-        * **`CTRL + 0`**: Clear all active shaders and return to the default video output.
+    * **Recommended Method (Permanent Setting):**
+        Press **Enter** during video playback to open the on-screen menu. Navigate to `Change Video Playback Profile` and select an Anime4K preset. This choice will be remembered as the default for all future playback.
 
-    * **Alternative Method (On-Screen Menu):**
-        You can also press **Enter** during video playback to open the menu. Navigate to `Change Video Playback Profile` and select an Anime4K preset. This choice will also be remembered for future playback.
-
+    * **Alternative Method (Temporary Hotkeys):**
+        The installer also configures hotkeys for quick, temporary adjustments during a single playback session. These changes will not be saved for the next video.
+        * **`CTRL + 1` to `CTRL + 6`**: Activate different "Fast" modes of Anime4K.
+        * **`CTRL + 0`**: Clear all active shaders.
 
 ## Uninstallation
 
