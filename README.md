@@ -67,6 +67,16 @@ If you wish to remove the application and all its dependencies, please download 
 
 ## Usage Notes & Tips
 
+### Modifying Server Configuration
+
+If you entered your server details incorrectly during the first-time setup, or if you need to change servers later, you can do so graphically:
+
+1.  Look for the **Jellyfin MPV Shim icon** in the macOS menu bar (the bar at the top of your screen).
+2.  Click the icon and select **"Configure Servers"** from the dropdown menu.
+3.  A window will pop up allowing you to edit, add, or remove server configurations.
+
+![Configure Servers Menu](assets/configure_servers.png)
+
 ### Verifying Video Filters (Shaders)
 
 Once a video is playing in mpv, you can check if the video filters (like Anime4K) have been loaded correctly.
