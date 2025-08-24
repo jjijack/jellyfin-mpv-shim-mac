@@ -66,9 +66,15 @@ If Jellyfin MPV Shim is terminated (due to an error), its icon will briefly disa
 For advanced users who prefer to build the application from the source scripts, you can use [Platypus](https://sveinbjorn.org/platypus) to package the launcher.
 
 1.  Download and install Platypus.
-2.  Open Platypus and select the `jellyfin-shim-launcher.sh` script as the "Script Path".
+2.  Open Platypus and select the `jellyfin-shim-launcher_platypus.sh` script as the "Script Path".
 3.  This file could be utilized by Platypus to create an integrated app. `Jellyfin Media Player.app` should be selected as a "Bundled File" by dragging it into the files list.
 4.  It is recommended to set "Interface" to "None" and check "Run in background" only.
 5.  Set your desired app name and icon, then click "Create App".
 
 ![Platypus Configuration](assets/platypus_screenshot.png)
+
+## License
+
+This project is licensed under the GNU General Public License v3.0.
+
+This work is a derivative of and designed to be used with [jellyfin-mpv-shim](https://github.com/jellyfin/jellyfin-mpv-shim), which is also licensed under the GPLv3. It incorporates components that may be subject to the MIT License.

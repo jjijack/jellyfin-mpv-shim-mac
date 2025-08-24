@@ -68,9 +68,15 @@
 对于希望从仓库里的脚本自行打包应用的高级用户，您可以使用 [Platypus](https://sveinbjorn.org/platypus) 来创建。
 
 1.  下载并安装 Platypus。
-2.  打开 Platypus，在“Script Path”中选择 `jellyfin-shim-launcher.sh` 脚本。
+2.  打开 Platypus，在“Script Path”中选择 `jellyfin-shim-launcher_platypus.sh` 脚本。
 3.  您可以使用此文件通过 Platypus 创建一个集成化的 App。请将 `Jellyfin Media Player.app` 拖拽到“Bundled Files”文件列表中。
 4.  建议将“Interface”设置为“None”，并仅勾选“Run in background”选项。
 5.  设置您喜欢的应用名称和图标，然后点击“Create App”。
 
 ![Platypus 配置截图](assets/platypus_screenshot.png)
+
+## 许可证
+
+本项目采用 GNU 通用公共许可证 v3.0 进行授权。
+
+本项目是 [jellyfin-mpv-shim](https://github.com/jellyfin/jellyfin-mpv-shim) 的衍生作品，旨在与其协同工作。原项目同样基于 GPLv3 授权。
