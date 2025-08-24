@@ -26,13 +26,14 @@ This project solves the common compatibility issues and cumbersome setup process
 ## Installation & Usage
 
 1.  **Download the DMG**: Go to the [Releases page](https://github.com/jjijack/jellyfin-mpv-shim-mac/releases) and download the latest `Jellyfin.Shim.Launcher.Installer.vX.X.X.dmg` file.
-2.  **Install the App**: Open the DMG file, and drag the `Jellyfin Shim Launcher.app` icon onto the `Applications` folder alias.
-3.  **Run the Installer Script**:
+2.  **Run the Installer Script**:
+    * Open the DMG file.
     * Open your **Terminal** application.
     * Type `bash ` (note the space after `bash`).
     * Drag the `install.sh` file from the DMG window into the Terminal window.
-    * Press **Enter**. The script will guide you through the rest of the process, including asking for your password and prompting you to log in to Jellyfin.
-4.  **Launch the App**: Once the installation is complete, you can run `Jellyfin Shim Launcher` from your Applications folder or Launchpad.
+    * Press **Enter**. The script will guide you through installing all dependencies and the initial login setup.
+3.  **Install the App**: After the installer script finishes successfully, drag the `Jellyfin Shim Launcher.app` icon onto the `Applications` folder alias.
+4.  **Launch the App**: You can now run `Jellyfin Shim Launcher` from your Applications folder or Launchpad.
 
 ### Important Note for First-Time Launch
 
@@ -40,9 +41,29 @@ Due to macOS Gatekeeper, when you first open the `Jellyfin Shim Launcher.app`, y
 
 To bypass this, **right-click the app icon and select "Open"** from the context menu. This only needs to be done once.
 
+#### Post-Installation Steps
+
+After the first launch, you may need to configure the following settings within Jellyfin:
+
+1.  **Set the Playback Device**
+    Please change the "Cast to Device" option to the `jellyfin-mpv-shim` device (usually named after your Mac model, e.g., `MacBook-Pro.local`). This setting typically only needs to be changed once. However, if `jellyfin-mpv-shim` is slow to load, the device may revert to the default Jellyfin player; if this happens, simply select the correct device again.
+
+    ![Set Playback Device](assets/cast_device.png)
+
+2.  **Enable Anime4K Filters (Optional)**
+    The installer automatically configures hotkeys for an easy way to toggle different Anime4K presets during video playback. For a detailed explanation of what each Anime4K filter does, please refer to the [official GLSL Instructions](https://github.com/bloc97/Anime4K/blob/v4.0.1/GLSL_Instructions.md).
+
+    * **Recommended Method (Hotkeys):**
+        * **`CTRL + 1` to `CTRL + 6`**: Activate different "Fast" modes of Anime4K. A text overlay (e.g., "Anime4K: Mode A (Fast)") will appear on-screen to confirm the change.
+        * **`CTRL + 0`**: Clear all active shaders and return to the default video output.
+
+    * **Alternative Method (On-Screen Menu):**
+        You can also press **Enter** during video playback to open the menu. Navigate to `Change Video Playback Profile` and select an Anime4K preset. This choice will also be remembered for future playback.
+
+
 ## Uninstallation
 
-If you wish to remove the application and all its dependencies, simply run the `uninstall.sh` script included in the DMG.
+If you wish to remove the application and all its dependencies, please download and run the `uninstall.sh` script from the [Releases page](https://github.com/jjijack/jellyfin-mpv-shim-mac/releases) in your Terminal.
 
 ## Usage Notes & Tips
 
@@ -50,10 +71,12 @@ If you wish to remove the application and all its dependencies, simply run the `
 
 Once a video is playing in mpv, you can check if the video filters (like Anime4K) have been loaded correctly.
 
-Press the backtick key (`` ` ``) to open the mpv console. Then, type `show-text "${glsl-shaders}"` and press Enter.
+Press **Shift+I** to open the on-screen stats, then press the **2** key on your keyboard's top row to cycle to the "User Shaders" page.
 
-* **Success**: If a long list of file paths appears on-screen (e.g., `/Users/jjijack/.local/pipx/venvs/jellyfin-mpv-shim/...`), the filters have been successfully loaded.
-* **Failure**: If the output is empty, the filters were not loaded. Please check your configuration.
+* **Success**: If you see a list of shaders starting with `Anime4K`, the filters have been successfully loaded.
+* **Failure**: If the list is empty or does not show the expected shaders, the filters were not loaded. Please check your configuration.
+
+![Verifying Shaders](assets/verifying_shaders.png)
 
 ### Dock Icon Behavior
 

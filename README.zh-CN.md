@@ -26,13 +26,14 @@
 ## 安装与使用
 
 1.  **下载 DMG**: 前往 [Releases 页面](https://github.com/jjijack/jellyfin-mpv-shim-mac/releases) 下载最新的 `Jellyfin.Shim.Launcher.Installer.vX.X.X.dmg` 文件。
-2.  **安装 App**: 打开 DMG 文件，将 `Jellyfin Shim Launcher.app` 图标拖拽到右侧的“应用程序”文件夹快捷方式上。
-3.  **运行安装脚本**:
+2.  **运行安装脚本**:
+    * 打开 DMG 文件。
     * 打开您的“终端 (Terminal)”应用。
     * 输入 `bash ` (注意 `bash` 后面有一个空格)。
     * 将 `install.sh` 文件从 DMG 窗口中拖拽到终端窗口里。
-    * 按**回车键**。脚本将引导您完成余下的安装和登录步骤。
-4.  **启动 App**: 安装成功后，您就可以从“应用程序”文件夹或“启动台”中运行 `Jellyfin Shim Launcher` 了。
+    * 按**回车键**。脚本将引导您完成所有依赖的安装和首次登录配置。
+3.  **安装 App**: 在安装脚本成功执行完毕后，将 `Jellyfin Shim Launcher.app` 图标拖拽到右侧的“应用程序”文件夹快捷方式上。
+4.  **启动 App**: 您现在就可以从“应用程序”文件夹或“启动台”中运行 `Jellyfin Shim Launcher` 了。
 
 ### 首次运行重要提示
 
@@ -40,16 +41,37 @@
 
 此时，请**右键点击应用图标，然后选择“打开”**，即可正常运行。此操作只需进行一次。
 
+#### 安装后步骤
+
+首次启动后，您可能需要在 Jellyfin 界面中进行以下配置：
+
+1.  **设置播放设备**
+    请注意把“投射到设备 (Cast to Device)”更改为 `jellyfin-mpv-shim` 的设备（通常是您的 Mac 型号，例如 `MacBook-Pro.local`）。这个设置通常只需要修改一次，但有时 `jellyfin-mpv-shim` 未能及时加载，会导致播放设备变回 Jellyfin 内部播放器，届时再次修改即可。
+
+    ![设置播放设备](assets/cast_device.png)
+
+2.  **启用 Anime4K 滤镜 (可选)**
+    本安装脚本已为您自动配置了快捷键，方便您在播放视频时轻松切换不同的 Anime4K 预设。关于不同滤镜的具体说明，请参阅 [Anime4K 官方 GLSL 指南](https://github.com/bloc97/Anime4K/blob/v4.0.1/GLSL_Instructions.md)。
+
+    * **推荐方法 (快捷键):**
+        * **`CTRL + 1` 至 `CTRL + 6`**: 激活不同的 Anime4K “Fast” 模式。屏幕上会显示相应的文字（例如 “Anime4K: Mode A (Fast)”）来确认切换成功。
+        * **`CTRL + 0`**: 清除所有已加载的滤镜，恢复默认视频画面。
+
+    * **备用方法 (屏幕菜单):**
+        您也可以在播放视频时按下 **回车键 (Enter)** 打开菜单，选择 `Change Video Playback Profile`，然后选择一个 Anime4K 预设。此设置同样会被记忆，无需重复操作。
+
 ## 使用技巧
 
 ### 验证视频滤镜（着色器）是否加载
 
 在 mpv 开始播放视频后，您可以检查视频滤镜（例如 Anime4K）是否已正确加载。
 
-按下反引号键 (`` ` ``) 来打开 mpv 的控制台，然后输入 `show-text "${glsl-shaders}"` 并按回车。
+请按下 **Shift+I** 来打开屏幕统计信息，然后再按键盘顶部的 **2** 键，切换到“User Shaders”页面。
 
-* **成功**: 如果屏幕上出现了一长串文件路径（例如 `/Users/jjijack/.local/pipx/venvs/jellyfin-mpv-shim/...`），则代表滤镜已成功加载。
-* **失败**: 如果输出为空，则代表滤镜未加载，请检查您的相关配置。
+* **成功**: 如果您看到以 `Anime4K` 开头的着色器列表，则代表滤镜已成功加载。
+* **失败**: 如果列表为空或未显示预期的着色器，则代表滤镜未加载，请检查您的相关配置。
+
+![Verifying Shaders](assets/verifying_shaders.png)
 
 ### 关于程序坞（Dock）图标的说明
 
@@ -61,7 +83,7 @@
 
 ## 卸载
 
-如果您需要卸载本程序及其所有依赖，请在终端中运行 DMG 包里附带的 `uninstall.sh` 脚本。
+如果您需要卸载本程序及其所有依赖，请在终端中运行 [Releases 页面](https://github.com/jjijack/jellyfin-mpv-shim-mac/releases) 中的 `uninstall.sh` 脚本。
 
 ## 自行打包 App
 

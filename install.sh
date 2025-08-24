@@ -26,10 +26,8 @@ echo "You may be prompted for your administrator password."
 echo ""
 
 # --- Step 1: Create Configuration Directory ---
-# This is the most robust way to create the directory and set permissions.
 if [ ! -d "$CONFIG_DIR" ]; then
     echo "Creating configuration directory..."
-    # Use sudo to create the directory and immediately give ownership to the current user.
     sudo mkdir -p "$CONFIG_DIR"
     sudo chown "$(whoami)" "$CONFIG_DIR"
     echo "Configuration directory created at: $CONFIG_DIR"
@@ -80,12 +78,38 @@ if [ -n "$config_file_path" ]; then
     fi
 fi
 
-# --- Step 4: First-Time Login ---
+# --- Step 4: Configure Custom MPV Hotkeys ---
+echo "Configuring custom hotkeys for Anime4K..."
+# Find the real shaders directory
+SHADERS_SOURCE_PATH=$(find "$HOME/.local/pipx/venvs/jellyfin-mpv-shim" -type d -name "shaders" 2>/dev/null | head -n 1)
+SHADERS_LINK_PATH="$CONFIG_DIR/shaders"
+
+# Create symbolic link if the source exists and the link doesn't
+if [ -d "$SHADERS_SOURCE_PATH" ] && [ ! -e "$SHADERS_LINK_PATH" ]; then
+    echo "Creating symbolic link for shaders directory..."
+    ln -s "$SHADERS_SOURCE_PATH" "$SHADERS_LINK_PATH"
+fi
+
+# Create the input.conf file
+INPUT_CONF_PATH="$CONFIG_DIR/input.conf"
+echo "Writing hotkey configuration to $INPUT_CONF_PATH..."
+cat > "$INPUT_CONF_PATH" << EOL
+# Optimized shaders for lower-end GPU:
+CTRL+1 no-osd change-list glsl-shaders set "~~/shaders/Anime4K_Clamp_Highlights.glsl:~~/shaders/Anime4K_Restore_CNN_M.glsl:~~/shaders/Anime4K_Upscale_CNN_x2_M.glsl:~~/shaders/Anime4K_AutoDownscalePre_x2.glsl:~~/shaders/Anime4K_AutoDownscalePre_x4.glsl:~~/shaders/Anime4K_Upscale_CNN_x2_S.glsl"; show-text "Anime4K: Mode A (Fast)"
+CTRL+2 no-osd change-list glsl-shaders set "~~/shaders/Anime4K_Clamp_Highlights.glsl:~~/shaders/Anime4K_Restore_CNN_Soft_M.glsl:~~/shaders/Anime4K_Upscale_CNN_x2_M.glsl:~~/shaders/Anime4K_AutoDownscalePre_x2.glsl:~~/shaders/Anime4K_AutoDownscalePre_x4.glsl:~~/shaders/Anime4K_Upscale_CNN_x2_S.glsl"; show-text "Anime4K: Mode B (Fast)"
+CTRL+3 no-osd change-list glsl-shaders set "~~/shaders/Anime4K_Clamp_Highlights.glsl:~~/shaders/Anime4K_Upscale_Denoise_CNN_x2_M.glsl:~~/shaders/Anime4K_AutoDownscalePre_x2.glsl:~~/shaders/Anime4K_AutoDownscalePre_x4.glsl:~~/shaders/Anime4K_Upscale_CNN_x2_S.glsl"; show-text "Anime4K: Mode C (Fast)"
+CTRL+4 no-osd change-list glsl-shaders set "~~/shaders/Anime4K_Clamp_Highlights.glsl:~~/shaders/Anime4K_Restore_CNN_M.glsl:~~/shaders/Anime4K_Upscale_CNN_x2_M.glsl:~~/shaders/Anime4K_Restore_CNN_S.glsl:~~/shaders/Anime4K_AutoDownscalePre_x2.glsl:~~/shaders/Anime4K_AutoDownscalePre_x4.glsl:~~/shaders/Anime4K_Upscale_CNN_x2_S.glsl"; show-text "Anime4K: Mode A+A (Fast)"
+CTRL+5 no-osd change-list glsl-shaders set "~~/shaders/Anime4K_Clamp_Highlights.glsl:~~/shaders/Anime4K_Restore_CNN_Soft_M.glsl:~~/shaders/Anime4K_Upscale_CNN_x2_M.glsl:~~/shaders/Anime4K_AutoDownscalePre_x2.glsl:~~/shaders/Anime4K_AutoDownscalePre_x4.glsl:~~/shaders/Anime4K_Restore_CNN_Soft_S.glsl:~~/shaders/Anime4K_Upscale_CNN_x2_S.glsl"; show-text "Anime4K: Mode B+B (Fast)"
+CTRL+6 no-osd change-list glsl-shaders set "~~/shaders/Anime4K_Clamp_Highlights.glsl:~~/shaders/Anime4K_Upscale_Denoise_CNN_x2_M.glsl:~~/shaders/Anime4K_AutoDownscalePre_x2.glsl:~~/shaders/Anime4K_AutoDownscalePre_x4.glsl:~~/shaders/Anime4K_Restore_CNN_S.glsl:~~/shaders/Anime4K_Upscale_CNN_x2_S.glsl"; show-text "Anime4K: Mode C+A (Fast)"
+
+CTRL+0 no-osd change-list glsl-shaders clr ""; show-text "GLSL shaders cleared"
+EOL
+
+# --- Step 5: First-Time Login ---
 if [ ! -f "$CRED_FILE" ] || ! grep -q '"AccessToken"' "$CRED_FILE"; then
     echo ""
     echo "--- First-Time Login ---"
     echo "Please enter your Jellyfin server details below."
-    # Run shim interactively in the current terminal
     jellyfin-mpv-shim
 else
     echo "Login credentials already exist. Skipping login."
