@@ -18,7 +18,7 @@ function get_confirmation() {
 # --- Main Uninstall Logic ---
 
 # Ask for user confirmation before proceeding
-get_confirmation "This script will remove jellyfin-mpv-shim and its dependencies (mpv, python, pipx) installed via Homebrew. Are you sure you want to continue?"
+get_confirmation "This script will remove jellyfin-mpv-shim and its dependencies (mpv, python, python-tk, pipx) installed via Homebrew. Are you sure you want to continue?"
 if [ $? -ne 0 ]; then
     echo "Uninstall cancelled by user."
     exit 0
@@ -54,9 +54,9 @@ fi
 
 # 3. Uninstall Homebrew packages
 if command -v brew &> /dev/null; then
-    echo "Uninstalling Homebrew packages: mpv, python, pipx..."
+    echo "Uninstalling Homebrew packages: mpv, python, python-tk, pipx..."
     # Check if packages are installed before trying to uninstall
-    for pkg in mpv python pipx; do
+    for pkg in mpv python python-tk pipx; do
         if brew list ${pkg} &> /dev/null; then
             brew uninstall ${pkg}
         else

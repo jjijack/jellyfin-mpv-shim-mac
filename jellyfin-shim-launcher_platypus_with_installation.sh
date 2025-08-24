@@ -41,7 +41,7 @@ function install_dependencies() {
   fi
 
   # Optimized check: 'brew list <pkg>' is a more reliable way to check for installation.
-  for pkg in python mpv pipx; do
+  for pkg in python python-tk mpv pipx; do
     if ! brew list ${pkg} &> /dev/null; then
       show_dialog "Installing ${pkg} using Homebrew..."
       brew install ${pkg}
